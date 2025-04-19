@@ -1,0 +1,99 @@
+/* Base Reset rgb(19, 18, 18) (16, 14, 23)*/
+body{
+  margin: 0;
+  padding: 0;
+  background-color:rgb(15, 13, 19);
+  color: #fff;
+}
+.hading{
+  color: red;
+}
+.link{
+  text-decoration: none;
+  color: rgb(6, 174, 240);
+}
+.footer{
+  color: blue;
+}
+ nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: black;
+  box-shadow: 0 2px 4px rgb(49, 48, 48);
+  gap: 0.7rem;
+}
+
+nav a {
+  text-decoration: none;
+  color:white;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav a li {
+  list-style: none;
+}
+
+.navred {
+  color: red;
+  font-weight: bold;
+}
+
+.github, .linkedIn, .youtub, .insta {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.github:hover,
+.linkedIn:hover,
+.youtub:hover,
+.insta:hover {
+  transform: scale(1.1);
+}
+
+
+@media (min-width: 768px) {
+  nav {
+    flex-wrap: nowrap;
+  }
+
+  nav a li {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  nav {
+    /* flex-direction: column; */
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  nav a li {
+    padding: 0.5rem 0;
+  }
+
+  .github, .linkedIn, .youtub, .insta {
+    margin-top: 0.5rem;
+  }
+} 
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #d62828;
+}
