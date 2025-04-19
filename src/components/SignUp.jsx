@@ -31,7 +31,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/signup", {
+      const response = await fetch("https://react-backend-api.onrender.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
