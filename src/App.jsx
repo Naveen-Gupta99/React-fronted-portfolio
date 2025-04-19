@@ -5,7 +5,7 @@ import About from './components/About'
 import User from './components/User'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
-import Footer from './components/footer'
+import Footer from './components/Footer'
 
 import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 import Login from './components/Login'
