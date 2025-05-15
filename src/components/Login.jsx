@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import './signUp.css'
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import './signUp.css';
+import { NavLink, useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-const  navigate = useNavigate()
+  const navigate = useNavigate();
 
-const [formLoginData, setLoginFormData] = useState({
+  const [formLoginData, setLoginFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleLoginChange = (e) => {
     setLoginFormData((prev) => ({
@@ -19,18 +21,19 @@ const [formLoginData, setLoginFormData] = useState({
     }));
   };
 
-
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
- 
+
     const existingToken = localStorage.getItem("Token");
     if (existingToken) {
       toast.info("User already logged in");
       setTimeout(() => {
-        toast.info("logout then login ")
+        toast.info("Logout then login");
       }, 1500);
       return;
     }
+
+    setLoading(true); // Show spinner
 
     try {
       const response = await fetch("https://react-backend-api.onrender.com/login", {
@@ -45,49 +48,90 @@ const [formLoginData, setLoginFormData] = useState({
       if (data.token) {
         localStorage.setItem("Token", data.token);
         toast.success("Login successful");
-        console.log("Server response:",data);
-        setLoginFormData({ name: "", email: "", password: "" });
+        console.log("Server response:", data);
+        setLoginFormData({ email: "", password: "" });
         setTimeout(() => {
           navigate('/');
         }, 2500);
-      }
-       else {
+      } else {
         toast.error("User not found");
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Signup failed: Network error");
+      toast.error("Login failed: Network error");
+    } finally {
+      setLoading(false); // Hide spinner
     }
-  
   };
-  
 
   return (
     <>
       <div className="container">
-      <div id='containerr'>
-        <h1>Login</h1>
-        <form onSubmit={handleLoginSubmit}>
+        <div id='containerr'>
+          <h1>Login</h1>
+          <form onSubmit={handleLoginSubmit}>
+            <input
+              className="input"
+              type="email"
+              value={formLoginData.email}
+              name="email"
+              placeholder="Enter your email"
+              onChange={handleLoginChange}
+              required
+            />
+            <br />
 
-          <input className="input" type="email" value={formLoginData.email} name="email" placeholder="Enter your email" onChange={handleLoginChange} required></input>
-          <br></br>
+            <input
+              className="input"
+              type="password"
+              value={formLoginData.password}
+              name="password"
+              placeholder="Enter your password"
+              onChange={handleLoginChange}
+              required
+            />
+            <br />
 
-          <input className="input" type="password" value={formLoginData.password} name="password" placeholder="Enter your password" onChange={handleLoginChange} required></input>
-          <br></br>
-
-         <button className='button' type="submit">submit</button><br></br>
-         <span className="redirect">Click for SignUp...</span>
-         <NavLink className="login" to="/signUp">Click</NavLink>
-        </form>
+            <button className='button' type="submit" disabled={loading}>
+              {loading ? (
+                <div className="spinner"></div>
+              ) : (
+                "Submit"
+              )}
+            </button>
+            <br />
+            <span className="redirect">Click for SignUp...</span>
+            <NavLink className="login" to="/signUp">Click</NavLink>
+          </form>
+        </div>
       </div>
-      </div>
 
+      <ToastContainer />
 
+      {/* Spinner Styles */}
+      <style>{`
+        .spinner {
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          animation: spin 1s linear infinite;
+          display: inline-block;
+        }
 
-<ToastContainer />
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .button:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+      `}</style>
     </>
-  )
+  );
 }
 
-export default App
-
+export default App;

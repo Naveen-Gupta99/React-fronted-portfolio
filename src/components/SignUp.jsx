@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './login.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function App() {
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -29,6 +32,8 @@ function App() {
       toast.info("Password must be at least 4 characters");
       return;
     }
+
+    setLoading(true); 
 
     try {
       const response = await fetch("https://react-backend-api.onrender.com/signup", {
@@ -57,6 +62,9 @@ function App() {
       console.error("Error:", error);
       toast.error("Signup failed: Network error");
     }
+   finally {
+    setLoading(false); // Hide spinner
+  }
   };
 
   return (
@@ -75,7 +83,13 @@ function App() {
             <input type="password" value={formData.password} name="password" placeholder="Enter your password" required onChange={handleChange}></input>
             <br></br>
 
-            <button className='button' type="submit">submit</button><br></br>
+            <button className='button' type="submit" disabled={loading}>
+              {loading ? (
+                <div className="spinner"></div>
+              ) : (
+                "Submit"
+              )}
+            </button><br></br>
             <span className="redirect">Click for login...</span>
             <NavLink className="login" to="/Login">Click</NavLink>
           </form>
@@ -83,6 +97,28 @@ function App() {
       </div>
 
       <ToastContainer />
+
+      <style>{`
+        .spinner {
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          animation: spin 1s linear infinite;
+          display: inline-block;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .button:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+      `}</style>
 
     </>
   )

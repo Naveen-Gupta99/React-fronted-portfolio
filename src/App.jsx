@@ -43,10 +43,6 @@ function App() {
     <RouterProvider router={router}/>
     </div>
 
-
-
-
-
 <Footer/>
 </>
   )
