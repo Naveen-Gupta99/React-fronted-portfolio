@@ -4,6 +4,7 @@ import './login.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './Footer'
 
 function App() {
   const navigate = useNavigate();
@@ -119,6 +120,8 @@ function App() {
           cursor: not-allowed;
         }
       `}</style>
+
+      <Footer/>
 
     </>
   )

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Home.css'
 import Naveen from '../components/Naveen.jpg'
 import Inter from '../components/12marksheet.png'
+import Footer from './Footer'
 
 function App() {
 
@@ -56,6 +57,9 @@ function App() {
         </section>
 
       </main>
+
+
+      <Footer/>
 
     </>
   );

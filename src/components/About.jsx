@@ -1,8 +1,10 @@
 import React from 'react'
+import Footer from './Footer'
 // import './signUp.css'
 import './Home.css'
 const About = () => {
   return (
+    <>
     <section className='section' id="about">
     <h2><div className='hading'>About Me</div></h2>
     <p>
@@ -12,6 +14,9 @@ const About = () => {
       Gorakhpur).Now many Thanks to wisite my Portfolio..!
     </p>
   </section>
+
+  <Footer/>
+  </>
   )
 }
 

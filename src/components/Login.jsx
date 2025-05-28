@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './signUp.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './Footer'
 
 function App() {
   const navigate = useNavigate();
@@ -130,6 +131,9 @@ function App() {
           cursor: not-allowed;
         }
       `}</style>
+
+
+      <Footer/>
     </>
   );
 }
