@@ -16,6 +16,7 @@ const Nvabar = () => {
     localStorage.removeItem("Token"); // Remove the token
     toast.success("Logged out successfully");
     navigate("/login"); // Redirect to login (or any route you want)
+    return;
   }
 };
 

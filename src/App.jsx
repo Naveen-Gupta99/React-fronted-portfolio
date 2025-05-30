@@ -9,6 +9,7 @@ import SignUp from './components/SignUp'
 import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 import Login from './components/Login'
 import Error404 from './components/Error404'
+import { HashRouter as Router } from 'react-router-dom';
 
 function App() {
   const router = createBrowserRouter([
